@@ -1,0 +1,32 @@
+<?php
+$fn=$_REQUEST['fname'];
+$ln=$_REQUEST['lname'];
+$g=$_REQUEST['sex'];
+$dob=$_REQUEST['dob'];
+$uemail=$_REQUEST['uemail'];
+$un=$_REQUEST['uname'];
+$pass1=$_REQUEST['pass1'];
+$add=$_REQUEST['address'];
+$pin=$_REQUEST['pincode'];
+$mob=$_REQUEST['mob'];
+$img=$_FILES['img'];
+echo $fn;
+echo "<br>";
+echo $ln;
+echo "<br>";
+echo "<br>";echo $add;
+echo "<br>";echo $dob;
+echo "<br>";echo $uemail;
+echo "<br>";echo $g;
+echo "<br>";echo $un;
+echo "<br>";echo $pin;
+$t=time();
+include("dbconnect.php");
+$pic=("user_".$t.".jpg");
+move_uploaded_file($img["tmp_name"],".\\userimg\\".$pic);
+echo $pic;
+mysqli_query($con,"insert into user_regi(fname,lname, gender, dob, uname,uemail, upass, address, pincode, mob, uimg) values('$fn','$ln','$g','$dob','$un','$uemail','$pass1','$add','$pin','$mob','$pic')");
+echo "<h3 align='center'>successfully registerd</h3><br>";
+echo "<a href='login.php'>LOGIN</a>";
+header("location:login.php");
+?>
